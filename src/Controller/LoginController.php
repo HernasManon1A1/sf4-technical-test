@@ -29,7 +29,6 @@ class LoginController extends Controller
             $form->isValid()
         ) {
             return $this->redirectToRoute('home');
-        }else {
         }
 
         return $this->render('login/login.html.twig', [

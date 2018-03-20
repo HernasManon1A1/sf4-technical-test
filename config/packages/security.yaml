@@ -21,7 +21,8 @@ security:
                 check_path: login
                 username_parameter: login[username]
                 password_parameter: login[password]
-#                csrf_parameter: login[_token]
+                csrf_parameter: login[_token]
+                csrf_token_id: login__token
 #                csrf_token_generator: security.csrf.token_manager
                 remember_me: false
             logout:
