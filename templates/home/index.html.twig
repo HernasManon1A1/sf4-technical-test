@@ -3,6 +3,18 @@
 {% block title %}Hello {{ controller_name }}!{% endblock %}
 
 {% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_widget(form.query) }}
+    <button type="submit">SEARCH</button>
+    {{ form_end(form) }}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
