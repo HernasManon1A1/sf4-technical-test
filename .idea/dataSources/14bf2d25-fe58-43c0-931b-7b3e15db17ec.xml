@@ -912,59 +912,108 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="230" parent="7" name="users">
+    <table id="230" parent="7" name="comment">
       <Engine>InnoDB</Engine>
       <Collation>utf8_unicode_ci</Collation>
     </table>
-    <column id="231" parent="230" name="id">
+    <table id="231" parent="7" name="users">
+      <Engine>InnoDB</Engine>
+      <Collation>utf8_unicode_ci</Collation>
+    </table>
+    <column id="232" parent="230" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="232" parent="230" name="username">
+    <column id="233" parent="230" name="author_id">
       <Position>2</Position>
-      <DataType>varchar(255)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="233" parent="230" name="password">
+    <column id="234" parent="230" name="repository_name">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="234" parent="230" name="email">
+    <column id="235" parent="230" name="comment">
       <Position>4</Position>
-      <DataType>varchar(255)|0</DataType>
+      <DataType>longtext|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="235" parent="230" name="roles">
+    <column id="236" parent="230" name="created_at">
       <Position>5</Position>
-      <DataType>json|0</DataType>
+      <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="236" parent="230" name="UNIQ_1483A5E9F85E0677">
-      <ColNames>username</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <index id="237" parent="230" name="UNIQ_1483A5E9E7927C74">
-      <ColNames>email</ColNames>
-      <Unique>1</Unique>
+    <index id="237" parent="230" name="IDX_9474526CF675F31B">
+      <ColNames>author_id</ColNames>
     </index>
     <key id="238" parent="230" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="239" parent="230" name="UNIQ_1483A5E9F85E0677">
+    <foreign-key id="239" parent="230" name="FK_9474526CF675F31B">
+      <ColNames>author_id</ColNames>
+      <RefSchemaName>test_sf4</RefSchemaName>
+      <RefTableName>users</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="240" parent="231" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="241" parent="231" name="username">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="242" parent="231" name="password">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="243" parent="231" name="email">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="244" parent="231" name="roles">
+      <Position>5</Position>
+      <DataType>json|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="245" parent="231" name="UNIQ_1483A5E9F85E0677">
+      <ColNames>username</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="246" parent="231" name="UNIQ_1483A5E9E7927C74">
+      <ColNames>email</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="247" parent="231" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="248" parent="231" name="UNIQ_1483A5E9F85E0677">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>UNIQ_1483A5E9F85E0677</UnderlyingIndexName>
     </key>
-    <key id="240" parent="230" name="UNIQ_1483A5E9E7927C74">
+    <key id="249" parent="231" name="UNIQ_1483A5E9E7927C74">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>UNIQ_1483A5E9E7927C74</UnderlyingIndexName>
     </key>

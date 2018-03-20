@@ -12,13 +12,16 @@
     {% endfor %}
     {{ form_start(form) }}
     {{ form_errors(form) }}
-    {{ form_widget(form.query) }}
-    <button type="submit">SEARCH</button>
+    {{ form_label(form.repositoryName) }}
+    {{ form_widget(form.repositoryName) }}
+    {{ form_label(form.comment) }}
+    {{ form_widget(form.comment) }}
+    <button type="submit">Ajouter un commentaire</button>
     {{ form_end(form) }}
 
-    {% if users is defined and users is not null %}
-        {% for user in users %}
-            <a href="{{ path('comment', {'username': user.login }) }}">{{ user.login }}</a>
+    {% if old_commentaries is defined and old_commentaries is not null %}
+        {% for old_commentary in old_commentaries %}
+            {{ old_commentary.comment }}
         {% endfor %}
     {% endif %}
 {% endblock %}
