@@ -1,27 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello!{% endblock %}
+{% block title %}{{ username }} {{ parent() }}{% endblock %}
 
 {% block body %}
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="flash-{{ label }}">
-                {{ message }}
-            </div>
+    <h1>Repositories de {{ username }}</h1>
+
+    {% if repositories is not empty %}
+        {% for repository in repositories %}
+            <a href="{{ repository.html_url }}">{{ repository.full_name }}</a><br>
+            {{ repository.description|default('Pas de description') }}<br><br>
         {% endfor %}
-    {% endfor %}
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-    {{ form_label(form.repositoryName) }}
-    {{ form_widget(form.repositoryName) }}
-    {{ form_label(form.comment) }}
-    {{ form_widget(form.comment) }}
-    <button type="submit">Ajouter un commentaire</button>
-    {{ form_end(form) }}
+    {%  endif %}
+    <hr>
 
     {% if old_commentaries is defined and old_commentaries is not null %}
+        <h2>Commentaires ({{ old_commentaries|length }})</h2>
         {% for old_commentary in old_commentaries %}
+            <i class="glyphicon glyphicon-inbox"></i> {{ old_commentary.repositoryName }}<br/>
+            <i class="glyphicon glyphicon-time"></i> Le {{ old_commentary.createdAt|date("d/m/Y h:i") }}<br/>
             {{ old_commentary.comment }}
+            <br><br>
         {% endfor %}
+        <hr>
     {% endif %}
+
+    <h2>Ajouter un commentaire</h2>
+    <div class="panel panel-default" >
+        <div class="panel-body" >
+            {{ form_start(form, {'method': 'POST', 'multipart': true, 'attr': {'class': 'form-inline', 'id': 'form'}}) }}
+            {{ form_errors(form.repositoryName) }}
+            {{ form_errors(form.comment) }}
+            <div class="input-group col-xs-5">
+                {{ form_widget(form.repositoryName, {'attr': {'class': 'form-control', 'id': 'comment', 'placeholder': 'Commentaire', 'rows' : 1}}) }}
+            </div>
+            <div class="input-group col-xs-5">
+                {{ form_widget(form.comment, {'attr': {'class': 'form-control', 'id': 'comment', 'placeholder': 'Commentaire', 'rows' : 1}}) }}
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12 controls">
+                    <button type="submit" class="btn btn-default">Envoyer</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
 {% endblock %}

@@ -1,23 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello!{% endblock %}
+{% block title %}Rechercher {{ parent() }}{% endblock %}
+
 {% block body %}
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="flash-{{ label }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
+    {% if users is not defined or users is null %}
+        <span style="padding-top: 30%; display: block"></span>
+    {% endif %}
     {{ form_start(form) }}
     {{ form_errors(form) }}
-    {{ form_widget(form.query) }}
-    <button type="submit">SEARCH</button>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+        {{ form_widget(form.query, {'attr': {'class': 'form-control', 'id': 'query', 'placeholder': 'Rechercher...'}}) }}
+    </div>
     {{ form_end(form) }}
 
     {% if users is defined and users is not null %}
-        {% for user in users %}
-            <a href="{{ path('comment', {'username': user.login }) }}">{{ user.login }}</a>
-        {% endfor %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading c-list">
+                        <span class="title">Résultat(s)</span>
+                    </div>
+                    <ul class="list-group" id="contact-list">
+                        {% for user in users %}
+                            <li class="list-group-item">
+                                <div class="col-xs-12 col-sm-3">
+                                    <img src="{{ user.avatar_url }}" alt="{{ user.login }}" class="img-responsive img-circle" />
+                                </div>
+                                <div class="col-xs-12 col-sm-9">
+                                    <a href="{{ path('comment', {'username': user.login }) }}">{{ user.login }}
+                                        {% if user.location is not null %}
+                                            ({{ user.name }})
+                                        {% endif %}
+                                    </a><br/>
+                                    <hr>
+                                    {% if user.email is not null %}
+                                        <i class="glyphicon glyphicon-send"></i> {{ user.email }}<br/>
+                                    {% endif %}
+                                    {% if user.location is not null %}
+                                        <i class="glyphicon glyphicon-map-marker"></i> {{ user.location }}<br/>
+                                    {% endif %}
+                                    {% if user.public_repos is not null and user.public_repos > 0 %}
+                                        <i class="glyphicon glyphicon-inbox"></i> Nombre de repositories: {{ user.public_repos }}<br/><br/>
+                                    {% endif %}
+                                    {% if user.bio is not null %}
+                                        <i class="fa fa-comments"></i> {{ user.bio }}<br/>
+                                    {% endif %}
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        {#{% for user in users %}#}
+            {#<a href="{{ path('comment', {'username': user.login }) }}">{{ user.login }}</a>#}
+        {#{% endfor %}#}
     {% endif %}
 {% endblock %}

@@ -12,7 +12,7 @@ Encore
 
     // uncomment to define the assets of the project
     .addEntry('main', './assets/js/main.js')
-    .addEntry('login-snippet', './assets/js/login-snippet.js')
+    .addEntry('snippet', './assets/js/snippet.js')
     // .addStyleEntry('css/app', './assets/css/app.scss')
 
     // uncomment if you use Sass/SCSS files

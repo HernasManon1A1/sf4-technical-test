@@ -1,4 +1,4 @@
-require('../css/login-snippet.css');
+require('../css/snippet.css');
 
 var $ = require('jquery');
 
