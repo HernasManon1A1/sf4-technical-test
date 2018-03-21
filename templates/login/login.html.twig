@@ -31,6 +31,9 @@
                 {% endif %}
 
                 <div class="input-group">
+                    <a href="{{ path('register') }}" class="">Nouveau compte</a>
+                </div>
+                <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         {{ form_widget(form.username, {'attr': {'class': 'form-control', 'id': 'user', 'placeholder': 'Username'}}) }}
                     </div>
@@ -39,9 +42,7 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         {{ form_widget(form.password, {'attr': {'class': 'form-control', 'id': 'password', 'placeholder': 'Password'}}) }}
                     </div>
-
                     <div class="form-group">
-                        <!-- Button -->
                         <div class="col-sm-12 controls">
                             <button type="submit" href="#" class="btn btn-primary btn-lg btn-block">Login</button>
                         </div>
