@@ -16,4 +16,4 @@
 ###< symfony/webpack-encore-pack ###
 
 ##>phpstorm idea ###
-./idea/
+.idea/
