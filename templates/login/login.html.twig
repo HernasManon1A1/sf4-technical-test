@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Connexion {{ parent() }}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('build/login-snippet.css') }}">
@@ -19,7 +19,7 @@
         </div>
         <div class="panel panel-default" >
             <div class="panel-heading">
-                <div class="panel-title text-center">Technical test SF4</div>
+                <div class="panel-title text-center">Test Technique Symfony4</div>
             </div>
             <div class="panel-body" >
                 {{ form_start(form, {'action': path('login'), 'method': 'POST', 'multipart': true, 'attr': {'class': 'form-horizontal', 'id': 'form'}}) }}
@@ -35,16 +35,16 @@
                 </div>
                 <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        {{ form_widget(form.username, {'attr': {'class': 'form-control', 'id': 'user', 'placeholder': 'Username'}}) }}
+                        {{ form_widget(form.username, {'attr': {'class': 'form-control', 'id': 'user', 'placeholder': 'Nom de compte'}}) }}
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        {{ form_widget(form.password, {'attr': {'class': 'form-control', 'id': 'password', 'placeholder': 'Password'}}) }}
+                        {{ form_widget(form.password, {'attr': {'class': 'form-control', 'id': 'password', 'placeholder': 'Mot de passe'}}) }}
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12 controls">
-                            <button type="submit" href="#" class="btn btn-primary btn-lg btn-block">Login</button>
+                            <button type="submit" href="#" class="btn btn-primary btn-lg btn-block">Se connecter</button>
                         </div>
                     </div>
                 {{ form_end(form) }}
