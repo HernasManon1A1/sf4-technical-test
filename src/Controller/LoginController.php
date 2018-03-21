@@ -57,9 +57,13 @@ class LoginController extends Controller
             $user->setPassword($encodedPassword);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('login');
+            try {
+                $em->flush();
+                $this->addFlash('success', 'Nouveau compte créé avec succès');
+                return $this->redirectToRoute('login');
+            } catch (\Exception $e) {
+                $this->addFlash('error', $e->getMessage());
+            }
         }
 
         return $this->render('login/register.html.twig', [
