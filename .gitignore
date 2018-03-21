@@ -17,3 +17,9 @@
 
 ##>phpstorm idea ###
 .idea/
+
+###>log files###
+*.log
+
+###> public/build ###
+public/build/
