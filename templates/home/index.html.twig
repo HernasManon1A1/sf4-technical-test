@@ -29,21 +29,21 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-9">
                                     <a href="{{ path('comment', {'username': user.login }) }}">{{ user.login }}
-                                        {% if user.location is not null %}
+                                        {% if user.name is defined and user.name is not null %}
                                             ({{ user.name }})
                                         {% endif %}
                                     </a><br/>
                                     <hr>
-                                    {% if user.email is not null %}
+                                    {% if user.email is defined and user.email is not null %}
                                         <i class="glyphicon glyphicon-send"></i> {{ user.email }}<br/>
                                     {% endif %}
-                                    {% if user.location is not null %}
+                                    {% if user.location is defined and user.location is not null %}
                                         <i class="glyphicon glyphicon-map-marker"></i> {{ user.location }}<br/>
                                     {% endif %}
-                                    {% if user.public_repos is not null and user.public_repos > 0 %}
+                                    {% if user.public_repos is defined and user.public_repos is not null and user.public_repos > 0 %}
                                         <i class="glyphicon glyphicon-inbox"></i> Nombre de repositories: {{ user.public_repos }}<br/><br/>
                                     {% endif %}
-                                    {% if user.bio is not null %}
+                                    {% if user.bio is defined and user.bio is not null %}
                                         <i class="fa fa-comments"></i> {{ user.bio }}<br/>
                                     {% endif %}
                                 </div>

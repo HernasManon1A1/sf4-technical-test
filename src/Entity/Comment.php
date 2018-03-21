@@ -41,6 +41,11 @@ class Comment
     private $createdAt;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $owner;
+
+    /**
      * Comment constructor.
      */
     public function __construct()
@@ -128,6 +133,25 @@ class Comment
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOwner(): ?string
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param mixed $owner
+     * @return Comment
+     */
+    public function setOwner(string $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

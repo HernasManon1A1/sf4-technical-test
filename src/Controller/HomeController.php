@@ -42,22 +42,32 @@ class HomeController extends Controller
                     $this->addFlash('error', 'Utilisateur non trouvé');
                 }
 
+                $limit = 0;
                 foreach ($users as $key => $user) {
-                    try {
-                        // Nombres de requêtes limité
-                        $infos = $apiCaller->call('/users/'.$user->login);
-                        $users[$key]->name = $infos->name;
-                        $users[$key]->location = $infos->location;
-                        $users[$key]->email = $infos->email;
-                        $users[$key]->bio = $infos->bio;
-                        $users[$key]->public_repos = $infos->public_repos;
-                    } catch (\Exception $e) {
+                    // Nombres de requêtes limité, on limite les appels
+                    if ($limit >= 5) {
                         $users[$key]->name = 'Hernas Manon';
                         $users[$key]->location = "Roubaix";
                         $users[$key]->email = "hernas.manon@gmail.com";
                         $users[$key]->bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum non lacus at sagittis. Integer a molestie sem. Aliquam fringilla convallis sem, sit amet ultrices eros pellentesque eget.";
                         $users[$key]->public_repos = 6;
+                    } else {
+                        try {
+                            $infos = $apiCaller->call('/users/'.$user->login);
+                            $users[$key]->name = $infos->name;
+                            $users[$key]->location = $infos->location;
+                            $users[$key]->email = $infos->email;
+                            $users[$key]->bio = $infos->bio;
+                            $users[$key]->public_repos = $infos->public_repos;
+                        } catch (\Exception $e) {
+                            $users[$key]->name = 'Hernas Manon';
+                            $users[$key]->location = "Roubaix";
+                            $users[$key]->email = "hernas.manon@gmail.com";
+                            $users[$key]->bio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum non lacus at sagittis. Integer a molestie sem. Aliquam fringilla convallis sem, sit amet ultrices eros pellentesque eget.";
+                            $users[$key]->public_repos = 6;
+                        }
                     }
+                    $limit++;
                 }
             }
         }
@@ -106,13 +116,14 @@ class HomeController extends Controller
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment, array('repositories' => $choices));
 
-        $oldCommentaries = $entityManager->getRepository(Comment::class)->findBy(array('author' => $this->getUser()));
+        $oldCommentaries = $entityManager->getRepository(Comment::class)->findBy(array('owner' => $username));
         $form->handleRequest($request);
         if (
             $form->isSubmitted() &&
             $form->isValid()
         ) {
             $comment->setAuthor($this->getUser());
+            $comment->setOwner($username);
             $entityManager->persist($comment);
             try {
                 $entityManager->flush();
