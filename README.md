@@ -31,7 +31,7 @@ Infos docker:
 * Database: test_sf4
 
 Pour connaitre l'adresse IP du container docker il faut:
-* Faire un **docker inspect test-sf4-mysql** et récupérer l'IP dans Networks > IPAddress
+* Faire un ```docker inspect test-sf4-mysql``` et récupérer l'IP dans ***Networks > IPAddress***
   
 
 **Le template part aux fraises?**
@@ -40,19 +40,19 @@ Pas de panique, il suffit de faire un ```yarn run encore production```, et si ja
 
 ## Commentaires
 
-Je sais pas combien de temps j'ai passé sur le sujet mais j'ai sûrement dépassé les 4h (en ne comptant pas les pauses, le boulot et les imprévus etc,)
+Je sais pas combien de temps j'ai passé sur le sujet mais j'ai sûrement dépassé les 4h (en ne comptant pas les pauses, le boulot et les imprévus etc.)
 
-J'ai fais ça calmement et je voulais proposer quelque chose de propre (même s'il n'est pas 100% parfait, il y a du nettoyage à faire)
+J'ai fais ça calmement et je voulais proposer quelque chose de propre (même si ce n'est pas 100% parfait, il y a toujours du nettoyage à faire)
 
 Le sujet est intéressant et je me suis permis quelques libertés comme l'ajout des informations de chaque utilisateurs.
 
-Au niveau de mes choix techniques, notamment de recréer un système de connexion à la main était vraiment chronophage (je regrette le FOSUserBundle)
+Au niveau de mes choix techniques, notamment de recréer un système de connexion à la main était vraiment chronophage (je regrette FOSUserBundle)
 
 J'ai utilisé des snippets Bootstrap, j'aurais pu utiliser des form_themes (oops), mais avouez que c'est bô les particules !
 
 J'ai eu un problème de certificat SSL local avec Guzzle, que j'ai bypass en mettant le verify à false au niveau des options (pourtant mes certificats étaient bien mis dans mon php.ini :( )
 
-J'avais commit des fichiers propre à Phpstorm que j'ai supprimé par la suite (ou presque tout)
+J'avais commit des fichiers propre à Phpstorm que j'ai supprimé par la suite
 
 L'API Github etant limité dans le nombre de requêtes, j'ai dû mettre en place des données bouchons, et c'est pas très très propre (sorry)
 
