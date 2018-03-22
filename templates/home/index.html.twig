@@ -4,7 +4,9 @@
 
 {% block body %}
     {% if users is not defined or users is null %}
-        <span style="padding-top: 30%; display: block"></span>
+        <span style="padding-top: 15%; margin-bottom: 60px; display: block">
+                    <img class="img-responsive center-block" src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png" alt="GitHub logo">
+        </span>
     {% endif %}
     {{ form_start(form) }}
     {{ form_errors(form) }}
@@ -15,6 +17,7 @@
     {{ form_end(form) }}
 
     {% if users is defined and users is not null %}
+        <span style="display: block; margin-bottom: 10px"></span>
         <div class="row">
             <div class="col-xs-12">
                 <div class="panel panel-default">
@@ -54,9 +57,5 @@
                 </div>
             </div>
         </div>
-
-        {#{% for user in users %}#}
-            {#<a href="{{ path('comment', {'username': user.login }) }}">{{ user.login }}</a>#}
-        {#{% endfor %}#}
     {% endif %}
 {% endblock %}
