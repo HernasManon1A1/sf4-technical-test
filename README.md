@@ -9,8 +9,8 @@
 ## Mise en route
 
 * Cloner le projet
-* Faire un **composer install**
 * Executer la commande: **docker-compose up -d**
+* Faire un **docker exec -ti test-sf4-php-fpm composer install**
 * Faire un **docker exec -ti test-sf4-php-fpm doctrine:database:create**
 * Faire un **docker exec -ti test-sf4-php-fpm doctrine:schema:create**
 * Se rendre sur http://localhost:8000
