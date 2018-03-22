@@ -9,9 +9,9 @@
 ### Mise en route
 
 * Cloner le projet
-* Faire un **composer:install**
-* Faire un **php bin/console d:d:c && php bin/console d:s:c**
+* Faire un **composer install**
 * Executer la commande: **docker-compose up -d**
+* Faire un **php bin/console d:d:c && php bin/console d:s:c**
 * Se rendre sur http://localhost:8000
 * Enjoy
 
