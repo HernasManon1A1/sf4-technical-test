@@ -15,23 +15,29 @@ class LoginType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class,
-                array(
+            ->add(
+                'username',
+                TextType::class,
+                [
                     "label" => "Username",
-                    "required" => true
-                )
+                    "required" => true,
+                ]
             )
-            ->add('password', PasswordType::class,
-                array(
+            ->add(
+                'password',
+                PasswordType::class,
+                [
                     "label" => "Password",
-                    "required" => true
-                )
+                    "required" => true,
+                ]
             )
-            ->add('email', EmailType::class,
-                array(
+            ->add(
+                'email',
+                EmailType::class,
+                [
                     "label" => "Email",
-                    "required" => true
-                )
+                    "required" => true,
+                ]
             )
         ;
     }
@@ -42,7 +48,7 @@ class LoginType extends AbstractType
             'data_class' => User::class,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'login_token'
+            'csrf_token_id'   => 'login_token',
         ]);
     }
 }

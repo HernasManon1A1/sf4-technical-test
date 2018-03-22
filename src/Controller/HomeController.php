@@ -19,7 +19,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class HomeController extends Controller
 {
-
     /**
      * Page d'accueil
      *
@@ -27,31 +26,39 @@ class HomeController extends Controller
      * @param ApiCaller $apiCaller Service API Caller
      *
      * @Route("/", name="home")
-     *
      * @IsGranted("ROLE_USER")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function homeAction(Request $request, ApiCaller $apiCaller)
-    {
+    public function homeAction(
+        Request $request,
+        ApiCaller $apiCaller
+    ) {
         $users = null;
         $form = $this->createFormBuilder()
             ->add('query', TextType::class)
             ->getForm();
 
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+
+        // Formulaire de recherche soumis
+        if ($form->isSubmitted() &&
+            $form->isValid()
+        ) {
             $query = $form->getData()['query'];
             if (isset($query) && !is_null($query)) {
+                // Appel vers l'API Github /search/users
                 $users = $apiCaller->call('/search/users', ['q' => $query]);
                 if (!$users) {
-                    $this->addFlash('error', 'Utilisateur non trouvé');
+                    $this->addFlash('danger', 'Aucun utilisateur n\'a été trouvé');
+                    return $this->redirectToRoute('home');
                 }
 
                 $limit = 0;
                 foreach ($users as $key => $user) {
-                    // Nombres de requêtes limité, on limite les appels
-                    if ($limit >= 5) {
+                    // Nombres de requêtes limité, on limite les appels à 5 max
+                    if (5 >= $limit) {
+                        // Données bouchon infos
                         $users[$key]->name = 'Hernas Manon';
                         $users[$key]->location = "Roubaix";
                         $users[$key]->email = "hernas.manon@gmail.com";
@@ -66,6 +73,7 @@ class HomeController extends Controller
                             $users[$key]->bio = $infos->bio;
                             $users[$key]->public_repos = $infos->public_repos;
                         } catch (\Exception $e) {
+                            // Données bouchon infos
                             $users[$key]->name = 'Hernas Manon';
                             $users[$key]->location = "Roubaix";
                             $users[$key]->email = "hernas.manon@gmail.com";
@@ -82,7 +90,7 @@ class HomeController extends Controller
             'home/index.html.twig',
             [
                     'form' => $form->createView(),
-                    'users' => $users
+                    'users' => $users,
             ]
         );
     }
@@ -96,7 +104,6 @@ class HomeController extends Controller
      * @param EntityManagerInterface $entityManager Entity Manager
      *
      * @Route("/{username}/comment", name="comment")
-     *
      * @IsGranted("ROLE_USER")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -113,10 +120,13 @@ class HomeController extends Controller
         try {
             // Nombre de requêtes limité
             $repositories = $apiCaller->call('users/'.$username.'/repos');
+
             foreach ($repositories as $repository) {
+                // On récupère les noms des répos pour le select
                 $choices[$repository->full_name] = $repository->full_name;
             }
         } catch (\Exception $e) {
+            // Données bouchon répos
             $repository = new \stdClass();
             $repository->full_name = 'stadline/sf2-technical-test';
             $repository->description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum non lacus at sagittis. Integer a molestie sem.';
@@ -125,6 +135,7 @@ class HomeController extends Controller
             // On met un deuxième exemple
             $repositories[] = $repository;
 
+            // Données bouchon pour le select
             $choices = [
                 'comp1/repo1' => 'comp1/repo1',
                 'comp2/repo2' => 'comp2/repo2',
@@ -139,12 +150,14 @@ class HomeController extends Controller
             ['repositories' => $choices]
         );
 
+        // Récupération des commentaires de l'utilisateur
         $oldCommentaries = $entityManager->getRepository(Comment::class)
             ->findBy(['owner' => $username]);
 
         $form->handleRequest($request);
-        if (
-            $form->isSubmitted() &&
+
+        // Formulaire commentaire soumis
+        if ($form->isSubmitted() &&
             $form->isValid()
         ) {
             $comment->setAuthor($this->getUser());
@@ -152,11 +165,7 @@ class HomeController extends Controller
             $entityManager->persist($comment);
             try {
                 $entityManager->flush();
-
-                $this->addFlash(
-                    'success',
-                    'Le commentaire a été ajouté avec succès'
-                );
+                $this->addFlash('success', 'Le commentaire a été ajouté avec succès');
             } catch (\Exception $e) {
                 $this->addFlash('error', 'Erreur lors de l\'ajout du commentaire');
             }
@@ -169,7 +178,7 @@ class HomeController extends Controller
                 'form' => $form->createView(),
                 'old_commentaries' => $oldCommentaries,
                 'username' => $username,
-                'repositories' => $repositories
+                'repositories' => $repositories,
             ]
         );
     }

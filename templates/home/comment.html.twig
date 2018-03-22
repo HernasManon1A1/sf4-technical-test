@@ -5,12 +5,13 @@
 {% block body %}
     <h1>Repositories de {{ username }}</h1>
 
-    {% if repositories is not empty %}
+    {% if repositories is empty %}
+        <p>Pas de répositories ¯\_(ツ)_/¯</p>
+    {% else %}
         {% for repository in repositories %}
             <a href="{{ repository.html_url }}">{{ repository.full_name }}</a><br>
             {{ repository.description|default('Pas de description') }}<br><br>
         {% endfor %}
-    {%  endif %}
     <hr>
 
     {% if old_commentaries is defined and old_commentaries is not null %}
@@ -65,5 +66,7 @@
             {{ form_end(form) }}
         </div>
     </div>
+    {%  endif %}
 
+    <a href="{{ path('home') }}"> < Retour</a>
 {% endblock %}

@@ -14,19 +14,23 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('repositoryName', ChoiceType::class,
-                array(
+            ->add(
+                'repositoryName',
+                ChoiceType::class,
+                [
                     'label' => 'Nom du repository',
                     'required' => true,
                     'expanded' => false,
-                    'choices' => $options['repositories']
-                )
+                    'choices' => $options['repositories'],
+                ]
             )
-            ->add('comment', TextareaType::class,
-                array(
+            ->add(
+                'comment',
+                TextareaType::class,
+                [
                     'label' => 'Commentaire',
-                    'required' => true
-                )
+                    'required' => true,
+                ]
             )
         ;
     }
@@ -35,7 +39,7 @@ class CommentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Comment::class,
-            'repositories' => null
+            'repositories' => null,
         ]);
     }
 }

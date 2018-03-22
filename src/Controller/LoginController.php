@@ -13,19 +13,27 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends Controller
 {
     /**
+     * Page Login
+     *
+     * @param AuthenticationUtils $authenticationUtils Utilitaires d'autentification
+     * @param Request             $request             Requête
+     *
      * @Route("/login", name="login")
-     * @param AuthenticationUtils $authenticationUtils
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function loginAction(AuthenticationUtils $authenticationUtils, Request $request)
-    {
+    public function loginAction(
+        AuthenticationUtils $authenticationUtils,
+        Request $request
+    ) {
         $user = new User();
-        $form = $this->createForm(LoginType::class, $user)->remove('email');
+        $form = $this->createForm(LoginType::class, $user)
+            ->remove('email');
+
         $error = $authenticationUtils->getLastAuthenticationError();
         $form->handleRequest($request);
-        if (
-            $form->isSubmitted() &&
+
+        // Formulaire login soumis
+        if ($form->isSubmitted() &&
             $form->isValid()
         ) {
             return $this->redirectToRoute('home');
@@ -33,24 +41,30 @@ class LoginController extends Controller
 
         return $this->render('login/login.html.twig', [
             'form' => $form->createView(),
-            'error'         => $error
+            'error'         => $error,
         ]);
     }
 
     /**
+     * Page création de compte
+     *
+     * @param Request                      $request         Requête
+     * @param UserPasswordEncoderInterface $passwordEncoder Password encoder
+     *
      * @Route("/register", name="register")
-     * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function registerAction(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder
+    ) {
         $user = new User();
         $form = $this->createForm(LoginType::class, $user);
 
         $form->handleRequest($request);
-        if (
-            $form->isSubmitted() &&
+        // Formulaire création soumis
+        if ($form->isSubmitted() &&
             $form->isValid()
         ) {
             $encodedPassword = $passwordEncoder->encodePassword($user, $user->getPassword());
