@@ -27,6 +27,10 @@ Infos docker:
 * Password: root
 * Database: test_sf4
 
+Pour connaitre l'adresse IP du container docker il faut:
+* Faire un **docker container ls** pour récupérer l'ID du container **mysql:5.7**
+* Faire un **docker inspect <ID du container>** et récupérer l'IP dans Networks > IPAddress
+
 
 Le template part aux fraises?
 Pas de panique, il suffit de faire un **yarn run encore production**, et si jamais, un **php bin/console ca:c**
