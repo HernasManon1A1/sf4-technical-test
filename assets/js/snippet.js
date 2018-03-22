@@ -62,4 +62,7 @@ $(function(){
         parallax: false
     });
 
+    setTimeout(function(){ $('#search-img').attr('src','https://i.imgur.com/Mj2iT9d.gif');},30000);
+    setTimeout(function(){ $('#search-img').attr('src','https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png');},33500);
+
 });
