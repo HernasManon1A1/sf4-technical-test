@@ -9,10 +9,10 @@
 ## Mise en route
 
 * Cloner le projet
-* Executer la commande: **docker-compose up -d**
-* Faire un **docker exec -ti test-sf4-php-fpm composer install**
-* Faire un **docker exec -ti test-sf4-php-fpm php bin/console doctrine:database:create**
-* Faire un **docker exec -ti test-sf4-php-fpm php bin/console doctrine:schema:create**
+* Executer la commande: ```docker-compose up -d```
+* Faire un ```docker exec -ti test-sf4-php-fpm composer install```
+* Faire un ```docker exec -ti test-sf4-php-fpm php bin/console doctrine:database:create```
+* Faire un ```docker exec -ti test-sf4-php-fpm php bin/console doctrine:schema:create```
 * Se rendre sur http://localhost:8000
 * Enjoy
 
@@ -20,9 +20,9 @@ Si jamais, j'ai déployé le docker sur mon serveur personnel: http://176.31.163
 
 ## Debug zone
 
-###J'ai une erreur de connexion au serveur MySQL
+**J'ai une erreur de connexion au serveur MySQL**
+
 Vérifier que les valeurs dans le .env sont les bonnes:
-Il y a un exemple dans le .env.dist
 
 Infos docker:
 * Port: 8002
@@ -34,9 +34,9 @@ Pour connaitre l'adresse IP du container docker il faut:
 * Faire un **docker inspect test-sf4-mysql** et récupérer l'IP dans Networks > IPAddress
   
 
-###Le template part aux fraises?
+**Le template part aux fraises?**
 
-Pas de panique, il suffit de faire un **yarn run encore production**, et si jamais, un **php bin/console ca:c**
+Pas de panique, il suffit de faire un ```yarn run encore production```, et si jamais, un ```php bin/console ca:c```
 
 ## Commentaires
 
@@ -57,7 +57,7 @@ J'avais commit des fichiers propre à Phpstorm que j'ai supprimé par la suite (
 L'API Github etant limité dans le nombre de requêtes, j'ai dû mettre en place des données bouchons, et c'est pas très très propre (sorry)
 
 
-Si jamais vous avez des questions : hernas.manon@gmail.com
+Si jamais vous avez des questions : **hernas.manon@gmail.com**
 
 
 PS: il y a un petit easter egg ;)
