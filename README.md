@@ -1,22 +1,24 @@
 # StadLine Technical Test
 
-### Specs
+## Specs
 * Symfony 4
 * MySQL5.7
 * Docker
 * Guzzle
 
-### Mise en route
+## Mise en route
 
 * Cloner le projet
 * Faire un **composer install**
 * Executer la commande: **docker-compose up -d**
+* Faire un **docker exec -ti test-sf4-php-fpm doctrine:database:create**
+* Faire un **docker exec -ti test-sf4-php-fpm doctrine:schema:create**
 * Se rendre sur http://localhost:8000
 * Enjoy
 
-### Debug zone
+## Debug zone
 
-J'ai une erreur de connexion au serveur MySQL:
+###J'ai une erreur de connexion au serveur MySQL
 Vérifier que les valeurs dans le .env sont les bonnes:
 Il y a un exemple dans le .env.dist
 
@@ -27,20 +29,14 @@ Infos docker:
 * Database: test_sf4
 
 Pour connaitre l'adresse IP du container docker il faut:
-* Faire un **docker container ls** pour récupérer l'ID du container **mysql:5.7**
-* Faire un **docker inspect** <*ID DU CONTAINER*> et récupérer l'IP dans Networks > IPAddress
+* Faire un **docker inspect test-sf4-mysql** et récupérer l'IP dans Networks > IPAddress
   
-Toujours pas?
-Essayez:
-* Faire un **docker container ls** pour récupérer l'ID du container **mysql:5.7**
-* **docker exec -ti** <*ID container*> **php bin/console d:s:c**
 
-
-Le template part aux fraises?
+###Le template part aux fraises?
 
 Pas de panique, il suffit de faire un **yarn run encore production**, et si jamais, un **php bin/console ca:c**
 
-### Commentaires
+## Commentaires
 
 Je sais pas combien de temps j'ai passé sur le sujet mais j'ai sûrement dépassé les 4h (en ne comptant pas les pauses, le boulot et les imprévus etc,)
 
