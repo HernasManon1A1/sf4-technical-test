@@ -11,7 +11,6 @@
 * Cloner le projet
 * Faire un **composer install**
 * Executer la commande: **docker-compose up -d**
-* Faire un **php bin/console d:d:c && php bin/console d:s:c**
 * Se rendre sur http://localhost:8000
 * Enjoy
 
@@ -29,10 +28,16 @@ Infos docker:
 
 Pour connaitre l'adresse IP du container docker il faut:
 * Faire un **docker container ls** pour récupérer l'ID du container **mysql:5.7**
-* Faire un **docker inspect <ID du container>** et récupérer l'IP dans Networks > IPAddress
+* Faire un **docker inspect** <*ID DU CONTAINER*> et récupérer l'IP dans Networks > IPAddress
+  
+Toujours pas?
+Essayez:
+* Faire un **docker container ls** pour récupérer l'ID du container **mysql:5.7**
+* **docker exec -ti** <*ID container*> **php bin/console d:s:c**
 
 
 Le template part aux fraises?
+
 Pas de panique, il suffit de faire un **yarn run encore production**, et si jamais, un **php bin/console ca:c**
 
 ### Commentaires
