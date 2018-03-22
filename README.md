@@ -40,7 +40,9 @@ J'ai fais ça calmement et je voulais proposer quelque chose de propre (même s'
 Le sujet est intéressant et je me suis permis quelques libertés comme l'ajout des informations de chaque utilisateurs.
 
 Au niveau de mes choix techniques, notamment de recréer un système de connexion à la main était vraiment chronophage (je regrette le FOSUserBundle)
-J'ai utilisé des snippets Bootstrap, j'aurais pu utiliser des form_themes (oops), mais avouez que c'est bien beau les particules !
+
+J'ai utilisé des snippets Bootstrap, j'aurais pu utiliser des form_themes (oops), mais avouez que c'est bô les particules !
+
 J'ai eu un problème de certificat SSL local avec Guzzle, que j'ai bypass en mettant le verify à false au niveau des options (pourtant mes certificats étaient bien mis dans mon php.ini :( )
 
 J'avais commit des fichiers propre à Phpstorm que j'ai supprimé par la suite (ou presque tout)
