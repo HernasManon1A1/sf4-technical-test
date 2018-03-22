@@ -16,6 +16,8 @@
 * Se rendre sur http://localhost:8000
 * Enjoy
 
+Si jamais, j'ai déployé le docker sur mon serveur personnel: http://176.31.163.110:8000 *(oui, je n'ai pas de nom de domaine #pauvre)*
+
 ## Debug zone
 
 ###J'ai une erreur de connexion au serveur MySQL
